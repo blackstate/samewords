@@ -7,12 +7,11 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-bottom: 3vh;
 
   @media (min-width: 481px) {
-    display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: center;
+    margin-bottom: 5vh;
   }
 `;
 
@@ -20,7 +19,7 @@ const Logo = styled.div`
   font-family: 'Noto Serif', serif;
   color: ${(props) => props.theme.headerColor};
   font-size: 1.4em;
-  margin: 0 0 0.5em 0;
+  margin: 0 0 0.8em 0;
 
   @media (min-width: 481px) {
     margin: 0 1em 0 0;
