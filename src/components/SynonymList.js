@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Synonym } from './WordComponents';
+import { Synonym } from './SharedComponents';
 
 const List = styled.ul`
   margin-bottom: 2.5em;

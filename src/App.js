@@ -1,6 +1,8 @@
 import React from 'react';
-import Home from './containers/Home';
+
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
+import Home from './containers/Home';
+import Main from './containers/Main';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -27,7 +29,7 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <Home />
+        <Main />
       </ThemeProvider>
     </>
   );

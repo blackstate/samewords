@@ -1,5 +1,22 @@
 import styled from 'styled-components';
 
+export const Container = styled.div`
+  background-color: ${(props) => props.theme.secondaryBg};
+  padding: 2em;
+  margin: 0 1em;
+  border-radius: 10px;
+
+  @media (min-width: 481px) {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 1025px) {
+    min-width: 45vw;
+    max-width: 760px;
+  }
+`;
+
 export const Synonym = styled.li`
   display: inline-block;
   font-family: 'Noto Serif', serif;
@@ -12,8 +29,4 @@ export const Synonym = styled.li`
   &:hover {
     background-color: ${(props) => props.theme.hoverColor};
   }
-`;
-
-export const SynonymList = styled.ul`
-  margin-bottom: 1.5em;
 `;

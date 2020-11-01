@@ -3,11 +3,11 @@ import React, { useEffect, useState } from 'react';
 import { fetchSynonyms } from '../fetchData';
 import {
   Greeting,
-  Container,
   HelpText,
   Special,
   CurrentWord,
 } from '../components/HomeComponents';
+import { Container } from '../components/SharedComponents';
 import SynonymList from '../components/SynonymList';
 import Searchbox from '../components/Searchbox';
 
@@ -24,14 +24,7 @@ const Home = () => {
   //getSynonyms('alike');
   //}, []);
 
-  let words = [
-    'coequal',
-    'duplicate',
-    'equal',
-    'even',
-    'indistinguishible',
-    'same',
-  ];
+  let words = ['coequal', 'duplicate', 'equal', 'even', 'indistinguishible'];
 
   const changeWord = (word) => {
     setWord(word);
