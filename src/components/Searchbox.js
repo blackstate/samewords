@@ -59,11 +59,26 @@ const InputField = styled.input`
 const SearchIcon = styled(MdSearch)`
   width: 20%;
   height: 60%;
+  cursor: pointer;
   color: ${(props) => props.theme.bodyColor};
 `;
 
 const Searchbox = (props) => {
   const [word, setWord] = useState('');
+
+  const checkEnterKey = (e) => {
+    if (e.keyCode === 13) {
+      searchHandler();
+      e.target.blur();
+    }
+  };
+
+  const searchHandler = () => {
+    if (word !== '') {
+      setWord('');
+      props.history.push('/' + word);
+    }
+  };
 
   const wordHandler = useCallback((event) => {
     setWord(event.target.value);
@@ -81,8 +96,9 @@ const Searchbox = (props) => {
           placeholder='Search word...'
           value={word}
           onChange={wordHandler}
+          onKeyDown={checkEnterKey}
         />
-        <SearchIcon />
+        <SearchIcon onClick={searchHandler} />
       </SearchContainer>
     </Container>
   );

@@ -2,13 +2,19 @@ import React, { useState, useEffect } from 'react';
 
 import { fetchSynonyms } from '../fetchData';
 import { Container } from '../components/SharedComponents';
-import { Header, Word, WordGroup, Speech } from '../components/MainComponents';
+import {
+  Header,
+  Word,
+  WordGroup,
+  Speech,
+  Spinner,
+} from '../components/MainComponents';
 import SynonymGroups from '../components/SynonymGroups';
+import { HeartSpinner } from 'react-spinners-kit';
 
 const Main = (props) => {
-  const word = props.location.pathname.substr(1);
-
   const [loading, setLoading] = useState(true);
+  const word = props.location.pathname.substr(1);
   const [data, setData] = useState(null);
   const [partsOfSpeech, setPartsOfSpeech] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -60,33 +66,32 @@ const Main = (props) => {
         });
         setFilteredData(fData);
       }
+
       setLoading(false);
     }
   }, [filter, data]);
 
-  //useEffect(() => {
-  //return () => {
-  //setLoading(true);
-  //};
-  //}, []);
+  if (loading) {
+    return (
+      <Spinner>
+        <HeartSpinner size={60} />
+      </Spinner>
+    );
+  }
 
-  const changeFilterHandler = (word) => {
-    if (filter === word) {
+  const changeFilterHandler = (speech) => {
+    if (filter === speech) {
       setFilter('');
     } else {
-      setFilter(word);
+      setFilter(speech);
     }
   };
-
-  if (loading) {
-    return <h3>Loading....</h3>;
-  }
 
   return (
     <Container>
       <Header>Synonyms for {word}</Header>
       <WordGroup>
-        <Word>{word}</Word>
+        <Word>{!loading && word}</Word>
         {partsOfSpeech.map((part) => (
           <Speech
             key={part}

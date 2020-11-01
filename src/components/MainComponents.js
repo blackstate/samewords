@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { FireworkSpinner } from 'react-spinners-kit';
 
 export const Header = styled.h1`
   color: ${(props) => props.theme.bodyColor};
@@ -36,4 +37,10 @@ export const Speech = styled.button`
 export const WordGroup = styled.div`
   display: flex;
   align-items: flex-end;
+`;
+
+export const Spinner = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 10vh;
 `;
