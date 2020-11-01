@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
 import { Synonym } from './SharedComponents';
 
 const List = styled.ul`
@@ -7,16 +8,18 @@ const List = styled.ul`
 `;
 
 const SynonymList = (props) => {
-  const synonyms = props.words.map((word) => (
-    <Synonym
-      key={word}
-      onMouseEnter={() => props.change(word)}
-      onMouseLeave={props.reset}
-    >
-      {word}
-    </Synonym>
-  ));
+  const synonyms = props.words.map((word, i) => {
+    const clickHandler = () => {
+      props.history.push('/' + word);
+    };
+
+    return (
+      <Synonym key={word + i} onClick={clickHandler}>
+        {word}
+      </Synonym>
+    );
+  });
   return <List>{synonyms}</List>;
 };
 
-export default SynonymList;
+export default withRouter(SynonymList);

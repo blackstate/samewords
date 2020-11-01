@@ -5,62 +5,72 @@ import SynonymList from './SynonymList';
 
 const DefinitionGroup = styled.div`
   display: flex;
+  align-items: center;
   font-family: 'Noto Serif', sans-serif;
   margin-bottom: 1.4em;
 `;
 
 const Type = styled.h3`
   color: ${(props) => props.theme.specialColor};
+  margin-right: 1em;
+
+  @media (min-width: 481px) {
+    margin-right: 0.5em;
+  }
 `;
 
 const Definition = styled.p`
-  font-style: italic;
   margin-left: 0.5em;
+  line-height: 150%;
 `;
 
 const Divider = styled.hr`
   margin-top: 2em;
   margin-bottom: 1.5em;
+  border: none;
+  height: 1px;
+  background-color: ${(props) => props.theme.bodyColor};
 `;
 
 const SynonymGroup = (props) => {
   let { def, type, synonyms } = props.group;
-  let ogWord = props.word;
-
-  const [definition, setDefinition] = useState(def);
-  const [current, setCurrent] = useState(ogWord);
-
-  const changeWord = (word) => {
-    console.log('hi');
-    setDefinition(definition.replace(current, word));
-    setCurrent(word);
-  };
-
-  const resetWord = () => {
-    setDefinition(definition.replace(current, ogWord));
-    setCurrent(ogWord);
-  };
 
   return (
     <>
-      <Divider />
       <DefinitionGroup>
         <Type>{type}</Type>
-        <Definition>{`'${definition}'`}</Definition>
+        <Definition>{`'${def}'`}</Definition>
       </DefinitionGroup>
-      <SynonymList change={changeWord} reset={resetWord} words={synonyms} />
+      <SynonymList words={synonyms} />
     </>
   );
 };
 
 const SynonymGroups = (props) => {
   const { data } = props;
-  console.log(props);
 
   return (
     <div>
       {data.map((group, i) => {
-        return <SynonymGroup key={i} group={group} word={props.word} />;
+        if (Array.isArray(group)) {
+          const groups = group.map((g, i) => (
+            <SynonymGroup key={(g.def, i)} group={g} word={props.word} />
+          ));
+
+          return (
+            <div key={i}>
+              <Divider />
+              {groups}
+            </div>
+          );
+        }
+
+        return (
+          <div key={i}>
+            <Divider />
+            <SynonymGroup group={group} word={props.word} />
+          </div>
+        );
       })}
     </div>
   );

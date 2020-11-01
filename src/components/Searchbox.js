@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { MdSearch } from 'react-icons/md';
+import { withRouter } from 'react-router-dom';
 
 const Container = styled.div`
   display: flex;
@@ -8,8 +9,9 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   margin-bottom: 3vh;
+  padding: 0 15px;
 
-  @media (min-width: 481px) {
+  @media (min-width: 769px) {
     flex-direction: row;
     margin-bottom: 5vh;
   }
@@ -20,8 +22,9 @@ const Logo = styled.div`
   color: ${(props) => props.theme.headerColor};
   font-size: 1.4em;
   margin: 0 0 0.8em 0;
+  cursor: pointer;
 
-  @media (min-width: 481px) {
+  @media (min-width: 769px) {
     margin: 0 1em 0 0;
   }
 `;
@@ -59,16 +62,20 @@ const SearchIcon = styled(MdSearch)`
   color: ${(props) => props.theme.bodyColor};
 `;
 
-const Searchbox = () => {
+const Searchbox = (props) => {
   const [word, setWord] = useState('');
 
-  const wordHandler = (event) => {
+  const wordHandler = useCallback((event) => {
     setWord(event.target.value);
+  }, []);
+
+  const logoClickHandler = () => {
+    props.history.push('/');
   };
 
   return (
     <Container>
-      <Logo>Same Words</Logo>
+      <Logo onClick={logoClickHandler}>Same Words</Logo>
       <SearchContainer>
         <InputField
           placeholder='Search word...'
@@ -81,4 +88,4 @@ const Searchbox = () => {
   );
 };
 
-export default Searchbox;
+export default withRouter(Searchbox);

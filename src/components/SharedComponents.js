@@ -2,13 +2,14 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   background-color: ${(props) => props.theme.secondaryBg};
-  padding: 2em;
+  padding: 1.3em;
   margin: 0 1em;
   border-radius: 10px;
 
   @media (min-width: 481px) {
     max-width: 760px;
     margin: 0 auto;
+    padding: 2em;
   }
 
   @media (min-width: 1025px) {
