@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+import axios from 'axios';
 import { Helmet } from 'react-helmet-async';
-import { fetchSynonyms } from '../fetchData';
 import { Container } from '../components/SharedComponents';
 import {
   Header,
@@ -31,7 +31,11 @@ const Main = (props) => {
   useEffect(() => {
     // get data
     const getSynonyms = async (word) => {
-      const data = await fetchSynonyms(word);
+      const response = await axios.post(
+        '../../.netlify/functions/fetchSynonyms',
+        { word: word }
+      );
+      const data = response.data;
       setData(data);
       setFilteredData(data);
     };
@@ -74,9 +78,7 @@ const Main = (props) => {
         setFilteredData(fData);
       }
 
-      setTimeout(() => {
-        setLoading(false);
-      }, 300);
+      setLoading(false);
     }
   }, [filter, data]);
 
