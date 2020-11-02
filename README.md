@@ -41,4 +41,4 @@ REACT_APP_API_KEY='your_key'
 
 I made this web application to practice using Styled Components and React Hooks. I wanted to deepen my understanding of hooks especially useEffect. I also hidden my api key by utilizing Netlify Functions. All css code is made by me except the heart loader. Designs are inspired from current famous synonym sites.
 
-The api can only handle 1000 requests so I will keep this as a personal project. I might update the source so that I can practice SEO and make the app public.
+The api can only handle 1000 requests per day because that is the limit of the Merriam-Webster dictionary API. I might create my own api in the future to remove this limitation if the need arise.
