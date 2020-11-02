@@ -46,7 +46,7 @@ const Home = () => {
               <Special>Click </Special>on words to view it's synonyms.
             </HelpText>
             <HelpText>
-              Data from Merriam-Webster's Collegiate Thesaurus.
+              Data from Merriam-Webster's Collegiate® Thesaurus.
             </HelpText>
           </div>
           <FooterIcons>
