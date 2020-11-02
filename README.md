@@ -1,13 +1,12 @@
 # Same Words
 
 [View website](https://samewords.netlify.app/).
+
 Same words is a web application to view synonyms. The data is from Merriam-Webster Dictionary API and can be found [here](https://dictionaryapi.com/).
 
-I made this web application to practice using Styled Components and React Hooks. I wanted to deepen my understanding of hooks especially useEffect. I also hidden my api key by utilizing Netlify Functions. All css code is made by me except the heart loader. Designs are inspired from current famous synonym sites.
-
-The api can only handle 1000 requests so I will keep this as a personal project. I might update the source so that I can practice SEO and make the app public.
-
+<p align='center'>
 <img src='./screenshot.png'>
+</p>
 
 ### Technologies Used
 
@@ -37,3 +36,9 @@ $ npm start
 ```sh
 REACT_APP_API_KEY='your_key'
 ```
+
+## About
+
+I made this web application to practice using Styled Components and React Hooks. I wanted to deepen my understanding of hooks especially useEffect. I also hidden my api key by utilizing Netlify Functions. All css code is made by me except the heart loader. Designs are inspired from current famous synonym sites.
+
+The api can only handle 1000 requests so I will keep this as a personal project. I might update the source so that I can practice SEO and make the app public.
