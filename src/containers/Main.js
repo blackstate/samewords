@@ -14,7 +14,7 @@ import { HeartSpinner } from 'react-spinners-kit';
 
 const Main = (props) => {
   const [loading, setLoading] = useState(true);
-  const word = props.location.pathname.substr(1);
+  const [word, setWord] = useState(props.location.pathname.substr(1));
   const [data, setData] = useState(null);
   const [partsOfSpeech, setPartsOfSpeech] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -22,6 +22,10 @@ const Main = (props) => {
 
   useEffect(() => {
     setLoading(true);
+    setWord(props.location.pathname.substr(1));
+  }, [props]);
+
+  useEffect(() => {
     // get data
     const getSynonyms = async (word) => {
       const data = await fetchSynonyms(word);
@@ -67,17 +71,11 @@ const Main = (props) => {
         setFilteredData(fData);
       }
 
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 300);
     }
   }, [filter, data]);
-
-  if (loading) {
-    return (
-      <Spinner>
-        <HeartSpinner size={60} />
-      </Spinner>
-    );
-  }
 
   const changeFilterHandler = (speech) => {
     if (filter === speech) {
@@ -86,6 +84,14 @@ const Main = (props) => {
       setFilter(speech);
     }
   };
+
+  if (loading) {
+    return (
+      <Spinner>
+        <HeartSpinner size={60} />
+      </Spinner>
+    );
+  }
 
   return (
     <Container>

@@ -1,9 +1,8 @@
 import styled from 'styled-components';
-import { FireworkSpinner } from 'react-spinners-kit';
 
 export const Header = styled.h1`
   color: ${(props) => props.theme.bodyColor};
-  font-size: 0.8em;
+  font-size: ${(props) => (props.lg ? '1em' : '0.8em')};
   margin-bottom: 1.4em;
 `;
 
