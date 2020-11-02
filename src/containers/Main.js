@@ -33,7 +33,9 @@ const Main = (props) => {
     const getSynonyms = async (word) => {
       const response = await axios.post(
         '../../.netlify/functions/fetchSynonyms',
-        { word: word }
+        {
+          word: word,
+        }
       );
       const data = response.data;
       setData(data);
