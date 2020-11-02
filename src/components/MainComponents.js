@@ -2,15 +2,17 @@ import styled from 'styled-components';
 
 export const Header = styled.h1`
   color: ${(props) => props.theme.bodyColor};
-  font-size: ${(props) => (props.lg ? '1em' : '0.8em')};
+  font-size: 0.8em;
   margin-bottom: 1.4em;
 `;
 
 export const Word = styled.h1`
   color: ${(props) => props.theme.headerColor};
-  font-size: 2em;
+  font-size: ${(props) => (props.sm ? '1.5em' : '2em')};
   font-family: 'Noto Serif', serif;
   margin-right: 0.5em;
+
+  margin-bottom: ${(props) => props.sm && '1em'};
 `;
 
 export const Speech = styled.button`
@@ -38,8 +40,8 @@ export const WordGroup = styled.div`
   align-items: flex-end;
 `;
 
-export const Spinner = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 10vh;
+export const Notice = styled.h1`
+  color: ${(props) => props.theme.bodyColor};
+  font-size: 1em;
+  margin-bottom: 1em;
 `;

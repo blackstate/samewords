@@ -2,6 +2,7 @@ import React from 'react';
 
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { Route, Switch } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import Searchbox from './components/Searchbox';
 import Home from './containers/Home';
 import Main from './containers/Main';
@@ -9,6 +10,7 @@ import Main from './containers/Main';
 const GlobalStyle = createGlobalStyle`
   body {
     padding-top: 8vh;
+    padding-bottom: 8vh;
     background-color: ${(props) => props.theme.primaryBg};
     font-size: 18px;
     color: ${(props) => props.theme.bodyColor};
@@ -28,7 +30,7 @@ const theme = {
 
 function App() {
   return (
-    <>
+    <HelmetProvider>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <>
@@ -39,7 +41,7 @@ function App() {
           </Switch>
         </>
       </ThemeProvider>
-    </>
+    </HelmetProvider>
   );
 }
 

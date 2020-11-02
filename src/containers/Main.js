@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
+import { Helmet } from 'react-helmet-async';
 import { fetchSynonyms } from '../fetchData';
 import { Container } from '../components/SharedComponents';
 import {
@@ -7,14 +8,15 @@ import {
   Word,
   WordGroup,
   Speech,
-  Spinner,
+  Notice,
 } from '../components/MainComponents';
 import SynonymGroups from '../components/SynonymGroups';
-import { HeartSpinner } from 'react-spinners-kit';
+import SynonymList from '../components/SynonymList';
+import Spinner from '../components/Spinner';
 
 const Main = (props) => {
   const [loading, setLoading] = useState(true);
-  const [word, setWord] = useState(props.location.pathname.substr(1));
+  const [word, setWord] = useState(null);
   const [data, setData] = useState(null);
   const [partsOfSpeech, setPartsOfSpeech] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -22,6 +24,7 @@ const Main = (props) => {
 
   useEffect(() => {
     setLoading(true);
+    setFilter('');
     setWord(props.location.pathname.substr(1));
   }, [props]);
 
@@ -86,31 +89,53 @@ const Main = (props) => {
   };
 
   if (loading) {
-    return (
-      <Spinner>
-        <HeartSpinner size={60} />
-      </Spinner>
-    );
+    return <Spinner />;
+  }
+
+  if (data.length === 0 || (!Array.isArray(data[0]) && !data[0].type)) {
+    let notFoundPage = null;
+    if (data.length === 0) {
+      notFoundPage = (
+        <>
+          <Word sm>{word}</Word>
+          <Notice>Word not found or does not exist.</Notice>
+        </>
+      );
+    } else {
+      notFoundPage = (
+        <>
+          <Word sm>{word}</Word>
+          <Notice>Word not found. Did you mean:</Notice>
+          <SynonymList words={data} />
+        </>
+      );
+    }
+    return <Container>{notFoundPage}</Container>;
   }
 
   return (
-    <Container>
-      <Header>Synonyms for {word}</Header>
-      <WordGroup>
-        <Word>{!loading && word}</Word>
-        {partsOfSpeech.map((part) => (
-          <Speech
-            key={part}
-            onClick={() => changeFilterHandler(part)}
-            current={filter}
-            self={part}
-          >
-            {part.length > 4 ? part.slice(0, 3) + '.' : part + '.'}
-          </Speech>
-        ))}
-      </WordGroup>
-      <SynonymGroups data={filteredData} />
-    </Container>
+    <>
+      <Helmet>
+        <title>{word} - Same Words</title>
+      </Helmet>
+      <Container>
+        <Header>Synonyms for {word}</Header>
+        <WordGroup>
+          <Word>{!loading && word}</Word>
+          {partsOfSpeech.map((part) => (
+            <Speech
+              key={part}
+              onClick={() => changeFilterHandler(part)}
+              current={filter}
+              self={part}
+            >
+              {part.length > 4 ? part.slice(0, 3) + '.' : part + '.'}
+            </Speech>
+          ))}
+        </WordGroup>
+        <SynonymGroups data={filteredData} />
+      </Container>
+    </>
   );
 };
 
