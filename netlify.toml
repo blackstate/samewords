@@ -1,5 +1,6 @@
 [build]
   functions = "./src/functions"
+  functionsSource="./.netlify/functions"
   command="npm run build"
   publish="build"
 

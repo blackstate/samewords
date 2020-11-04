@@ -16,33 +16,38 @@ import Spinner from '../components/Spinner';
 
 const Main = (props) => {
   const [loading, setLoading] = useState(true);
-  const [word, setWord] = useState(null);
+  const [word, setWord] = useState();
   const [data, setData] = useState(null);
   const [partsOfSpeech, setPartsOfSpeech] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
+    const currentWord = props.location.pathname.substr(1);
+    if (currentWord && currentWord !== word) {
+      const getSynonyms = async () => {
+        const response = await axios.post(
+          '../../.netlify/functions/fetchSynonyms',
+          {
+            word: currentWord,
+          }
+        );
+
+        const data = response.data;
+        setData(data);
+        setFilteredData(data);
+      };
+
+      getSynonyms();
+    }
     setLoading(true);
     setFilter('');
-    setWord(props.location.pathname.substr(1));
+
+    setWord(currentWord);
   }, [props]);
 
   useEffect(() => {
     // get data
-    const getSynonyms = async (word) => {
-      const response = await axios.post(
-        '../../.netlify/functions/fetchSynonyms',
-        {
-          word: word,
-        }
-      );
-      const data = response.data;
-      setData(data);
-      setFilteredData(data);
-    };
-
-    getSynonyms(word);
   }, [word]);
 
   useEffect(() => {
