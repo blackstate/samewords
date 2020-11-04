@@ -24,17 +24,22 @@ Same words is a web application to view synonyms. The data is from Merriam-Webst
 
 ### How to Use
 
-1. Clone repo then install packages and run development server.
+1. Clone repo then install packages.
 
 ```sh
 $ npm install
-$ npm start
 ```
 
 2. Provide your own Merriam-Webster api key in an env file.
 
 ```sh
 REACT_APP_API_KEY='your_key'
+```
+
+3. Start netlify dev server.
+
+```sh
+$ netlify dev
 ```
 
 ## About
