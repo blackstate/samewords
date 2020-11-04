@@ -24,7 +24,11 @@ const Main = (props) => {
 
   useEffect(() => {
     const currentWord = props.location.pathname.substr(1);
-    if (currentWord && currentWord !== word) {
+    if (currentWord === word) {
+      return;
+    }
+
+    if (currentWord) {
       const getSynonyms = async () => {
         const response = await axios.post(
           '../../.netlify/functions/fetchSynonyms',
@@ -38,13 +42,12 @@ const Main = (props) => {
         setFilteredData(data);
       };
 
+      setLoading(true);
       getSynonyms();
+      setFilter('');
+      setWord(currentWord);
     }
-    setLoading(true);
-    setFilter('');
-
-    setWord(currentWord);
-  }, [props]);
+  }, [props, word]);
 
   useEffect(() => {
     // get data
